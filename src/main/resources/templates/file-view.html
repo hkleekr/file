@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+<div class="container">
+  <div class="py-5 text-center">
+    <h2>파일 조회</h2> </div>
+  상품명: <span th:text="${file.fileName}">상품명</span><br/>
+<!--  첨부파일: <a th:if="${file.attachedFile}" th:href="|/attach/${file.id}|" th:text="${file.getAttachedFile().getUploadFileName()}" /><br/>-->
+  첨부파일: <a th:each="attachedFile : ${file.attachedFiles}" th:href="|/attach/${file.id}|" th:text="${file.getAttachedFile().getUploadFileName()}" /><br/>
+</div> <!-- /container --> </body>
+</html>

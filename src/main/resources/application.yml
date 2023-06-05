@@ -1,14 +1,18 @@
-#?? ???? ?? ?? ??: ??? ??? ?? too much log??? ???? ?? ?? ??
-logging:
-  level.org.apache.coyote.http11=debug
+# when uploading big size file, close below option => too much log
+#logging:
+#  level.org.apache.coyote.http11=debug
 
-#?? ?? ??
+#file store path
 file:
-  dir=C:\Users\82108\Desktop\filestore\
+  dir: C:/Users/82108/Desktop/filestore/
 
-#??? ??? ??
+# file size max
 spring:
   servlet:
     multipart:
       max-file-size: 1MB
       max-request-size: 10MB
+#  datasource:
+#    url: jdbc:h2:tcp://localhost/~/test
+#    driver-class-name: org.h2.Driver
+#    username: sa
