@@ -22,4 +22,21 @@ public class FileInfo {
 //    private Timestamp createdDate;
 //    private Timestamp deletedDate;
 //    private Boolean deletedYn;
+
+
+    public FileInfo(Long id, String fileName, UploadFile attachedFile, List<UploadFile> attachedFiles) {
+        this.id = id;
+        this.fileName = fileName;
+        this.attachedFile = attachedFile;
+        this.attachedFiles = attachedFiles;
+    }
+
+    public FileInfo() {
+
+    }
+
+    public FileInfo(Long id, String fileName) {
+        this.id = id;
+        this.fileName = fileName;
+    }
 }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FileList</title>
+</head>
+<body>
+<div class="py-5 text-center">
+  <h2>목록 보기 페이지</h2>
+</div>
+<input type="button" value="메인 페이지로 이동" onclick="history.go(-1)"/><br>
+  <table>
+    <tr>
+      <th>#</th>
+      <th>파일 명</th>
+    </tr>
+    <tr th:each="list : ${fileList}">
+      <td><span th:text="${list.id}"></span></td>
+      <td><span th:text="${list.fileName}"></span></td>
+    </tr>
+  </table>
+
+</body>
+</html>

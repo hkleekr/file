@@ -2,13 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
+  <title>File Uploaded</title>
 </head>
 <body>
-<div class="container">
-  <div class="py-5 text-center">
-    <h2>파일 조회</h2> </div>
-  상품명: <span th:text="${file.fileName}">상품명</span><br/>
-<!--  첨부파일: <a th:if="${file.attachedFile}" th:href="|/attach/${file.id}|" th:text="${file.getAttachedFile().getUploadFileName()}" /><br/>-->
-  첨부파일: <a th:each="attachedFile : ${file.attachedFiles}" th:href="|/attach/${file.id}|" th:text="${file.getAttachedFile().getUploadFileName()}" /><br/>
-</div> <!-- /container --> </body>
+  <div class="container">
+    <div class="py-5 text-center">
+      <h2>파일 조회 페이지</h2>
+    </div>
+  <input type="button" value="메인 페이지로 이동" onclick="history.go(-2)"/><br>
+    파일명: <span th:text="${file.fileName}">파일명</span><br/>
+    첨부파일 1 개 : <a th:if="${file.attachedFile}" th:href="|/attach/${file.id}|" th:text="${file.getAttachedFile().getUploadFileName()}" /><br/>
+<!--    TODO: 여러 개 리스트로 보여주기 필요-->
+<!--    첨부파일 여러 개: <a th:each="af : ${file.attachedFiles}" th:href="|/attach/${file.id}|" th:text="${file.getAttachedFile().getUploadFileName()}" /><br/>-->
+  </div> <!-- /container -->
+  <br>
+</body>
 </html>

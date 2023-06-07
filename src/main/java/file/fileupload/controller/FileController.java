@@ -4,7 +4,7 @@ package file.fileupload.controller;
 import file.fileupload.domain.FileForm;
 import file.fileupload.domain.FileInfo;
 import file.fileupload.domain.UploadFile;
-import file.fileupload.repository.FileRepository;
+import file.fileupload.repository.MemoryFileRepository;
 import file.fileupload.service.FileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,14 +29,20 @@ import java.util.List;
 @RequestMapping("/files")
 public class FileController {
 
-    private final FileRepository fileRepository;
+    private final MemoryFileRepository fileRepository;
     private final FileService fileService;
 
+    /**
+     * 파일 등록 폼 페이지 제시
+     */
     @GetMapping("/upload")
     public String newFile(@ModelAttribute FileForm form) {
-        return "upload-form";
+        return "/upload-form";
     }
 
+    /**
+     * 파일 저장 기능
+     */
     @PostMapping("/upload")
     public String saveFile(@ModelAttribute FileForm form, RedirectAttributes redirectAttributes) throws IOException {
 
@@ -55,18 +61,23 @@ public class FileController {
         return "redirect:/files/{fileId}";
     }
 
-    @GetMapping("/files/{id}")
-    public String files(@PathVariable Long id, Model model) {
-        FileInfo file = fileRepository.findById(id);
+    /**
+     * 업로드 확인 페이지
+     */
+    @GetMapping("/{id}")
+    public String viewSavedFile(@PathVariable Long id, Model model) {
+        FileInfo file = fileService.findFile(id);
         model.addAttribute("file", file);
         return "file-view";
     }
 
-    // 파일 다운로드
+    /**
+     * 파일 다운로드 페이지: 아직 동작 x(06-07-2023)
+     */
     @ResponseBody
-    @GetMapping("attach/{fileId}")
+    @GetMapping("/attach/{fileId}")
     public ResponseEntity<Resource> downloadAttached(@PathVariable Long fileId) throws MalformedURLException {
-        FileInfo file = fileRepository.findById(fileId);
+        FileInfo file = fileService.findFile(fileId);
         String storeFileName = file.getAttachedFile().getStoreFileName();
         String uploadFileName = file.getAttachedFile().getUploadFileName();
 
@@ -78,5 +89,16 @@ public class FileController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
                 .body(resource);
+    }
+
+    /**
+     * 목록 보기 페이지
+     */
+    @GetMapping("")
+    public String list(Model model) {
+
+        List<FileInfo> filesAll = fileService.findFilesAll();
+        model.addAttribute("fileList", filesAll);
+        return "/file-list";
     }
 }

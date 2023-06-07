@@ -3,13 +3,12 @@ package file.fileupload.repository;
 import file.fileupload.domain.FileInfo;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
-public class FileRepository {
+public class MemoryFileRepository {
+
+
 
     private final Map<Long, FileInfo> store = new HashMap<>();
     private long sequence = 0L;
@@ -22,6 +21,10 @@ public class FileRepository {
 
     public FileInfo findById(Long id) {
         return store.get(id);
+    }
+
+    public List<FileInfo> findAll() {
+        return new ArrayList<>(store.values());
     }
 
 
