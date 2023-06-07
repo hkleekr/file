@@ -11,9 +11,12 @@
     </div>
   <input type="button" value="메인 페이지로 이동" onclick="history.go(-2)"/><br>
     파일명: <span th:text="${file.fileName}">파일명</span><br/>
-    첨부파일 1 개 : <a th:if="${file.attachedFile}" th:href="|/attach/${file.id}|" th:text="${file.getAttachedFile().getUploadFileName()}" /><br/>
-<!--    TODO: 여러 개 리스트로 보여주기 필요-->
-<!--    첨부파일 여러 개: <a th:each="af : ${file.attachedFiles}" th:href="|/attach/${file.id}|" th:text="${file.getAttachedFile().getUploadFileName()}" /><br/>-->
+    첨부파일 1 개 : <a th:if="${file.attachedFile}"
+                  th:href="|/attach/${file.id}|"
+                  th:text="${file.getAttachedFile().getUploadFileName()}" /><br/>
+    첨부파일 여러 개: <a th:each="attachFile : ${file.attachedFiles}"
+                  th:href="|/attach/${attachFile.getUploadFileName()}|"
+                  th:text="${attachFile.getUploadFileName()}" /><br/>
   </div> <!-- /container -->
   <br>
 </body>

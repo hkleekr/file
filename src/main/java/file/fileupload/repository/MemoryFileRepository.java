@@ -8,8 +8,6 @@ import java.util.*;
 @Repository
 public class MemoryFileRepository {
 
-
-
     private final Map<Long, FileInfo> store = new HashMap<>();
     private long sequence = 0L;
 
@@ -27,28 +25,4 @@ public class MemoryFileRepository {
         return new ArrayList<>(store.values());
     }
 
-
-//    public final EntityManager em;
-//
-//    public FileRepository(EntityManager em) {
-//        this.em = em;
-//    }
-
-//    @Override
-//    public FileInfo save(FileInfo fileInfo) {
-//        em.persist(fileInfo);
-//        return fileInfo;
-//    }
-//
-//    @Override
-//    public Optional<FileInfo> findById(Long id) {
-//        FileInfo fileInfo = em.find(FileInfo.class, id);
-//        return Optional.ofNullable(fileInfo);
-//    }
-//
-//    @Override
-//    public List<FileInfo> findAll() {
-//        return em.createQuery("select m from FileInfo m", FileInfo.class)
-//                .getResultList();
-//    }
 }
