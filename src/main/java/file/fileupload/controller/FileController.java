@@ -72,6 +72,17 @@ public class FileController {
     }
 
     /**
+     * 목록 보기 페이지
+     */
+    @GetMapping("")
+    public String list(Model model) {
+
+        List<FileInfo> filesAll = fileService.findFilesAll();
+        model.addAttribute("fileList", filesAll);
+        return "/file-list";
+    }
+
+    /**
      * 파일 다운로드 페이지: 아직 동작 x(06-07-2023)
      */
     @ResponseBody
@@ -89,16 +100,5 @@ public class FileController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
                 .body(resource);
-    }
-
-    /**
-     * 목록 보기 페이지
-     */
-    @GetMapping("")
-    public String list(Model model) {
-
-        List<FileInfo> filesAll = fileService.findFilesAll();
-        model.addAttribute("fileList", filesAll);
-        return "/file-list";
     }
 }

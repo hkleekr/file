@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+/**
+ * db에 저장되지 않고 메모리에 저장되며, 서버 중지 시 휘발됨
+ */
 @Repository
 public class MemoryFileRepository {
 
